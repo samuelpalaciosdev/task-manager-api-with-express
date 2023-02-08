@@ -1,9 +1,13 @@
 const Task = require('../models/task');
 
-const getAllTasks = (req, res) => {
-  res.status(200).send('This are all your tasks :)');
+const getAllTasks = async (req, res) => {
+  try {
+    const tasks = await Task.find({}); // Find all tasks
+    res.status(200).json({ tasks });
+  } catch (error) {
+    res.status(500).json({ msg: err });
+  }
 };
-
 const getTask = (req, res) => {
   const { id } = req.params;
   res.status(200).json({ id: id }); // Return the id of the task
