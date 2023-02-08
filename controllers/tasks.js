@@ -1,3 +1,5 @@
+const Task = require('../models/task');
+
 const getAllTasks = (req, res) => {
   res.status(200).send('This are all your tasks :)');
 };
@@ -7,8 +9,9 @@ const getTask = (req, res) => {
   res.status(200).json({ id: id }); // Return the id of the task
 };
 
-const createTask = (req, res) => {
-  res.status(200).json(req.body);
+const createTask = async (req, res) => {
+  const task = await Task.create(req.body);
+  res.status(201).json({ task });
 };
 
 const updateTask = (req, res) => {
