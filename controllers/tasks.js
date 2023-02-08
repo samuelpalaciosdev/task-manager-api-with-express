@@ -5,7 +5,7 @@ const getAllTasks = async (req, res) => {
     const tasks = await Task.find({}); // Find all tasks (docs)
     res.status(200).json({ tasks });
   } catch (err) {
-    res.status(500).json({ msg: err });
+    res.status(200).json({ msg: err });
   }
 };
 const getTask = async (req, res) => {
