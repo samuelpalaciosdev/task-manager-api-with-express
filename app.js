@@ -1,8 +1,9 @@
 const express = require('express');
 const app = express();
 const port = 3000;
-
 const tasks = require('./routes/tasks');
+const connectDb = require('./db/connect');
+require('dotenv').config();
 
 // middleware
 app.use(express.json());
@@ -11,17 +12,21 @@ app.use(express.json());
 app.use('/api/v1/tasks', tasks);
 
 // routes
-
 app.get('/', (req, res) => {
   res.status(200).send('Home page');
 });
 
-app.get('/api/v1/tasks'); // get all tasks
-app.get('/api/v1/tasks/:id'); // get task by id
-app.post('/api/v1/tasks'); // post create new task
-app.put('/api/v1/tasks/:id'); // put update task
-app.delete('/api/v1/tasks/:id'); // delete delete task
+// Start up server funct
 
-app.listen(port, () => {
-  console.log(`Server listening on port: ${port}`);
-});
+const start = async () => {
+  try {
+    await connectDb(process.env.MONGO_URI); // If the connection to the database is successful
+    app.listen(port, () => {
+      console.log(`Server listening on port: ${port}`);
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+start();
