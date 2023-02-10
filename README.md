@@ -1,7 +1,7 @@
 
-# Store API
+# Task Manager API
 
-Store REST API, using Node.js, Express, Mongodb and Mongoose
+Task Manager REST API, using Node.js, Express, Mongodb and Mongoose
 ## Features
 
 - Get, Post, Patch & Delete Methods
